@@ -4,9 +4,11 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from "typeorm";
+import { Halaqoh } from "./Halaqoh";
 
-@Entity({ name: "data_tahun_ajaran" })
+@Entity({ name: "tahun_ajaran" })
 export class TahunAjaran {
   @PrimaryGeneratedColumn()
   id: number;
@@ -22,4 +24,7 @@ export class TahunAjaran {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => Halaqoh, (halaqoh) => halaqoh.tahun_ajaran) // ManyToOne relationship with Halaqoh (guru)
+  tahun_ajaran: Halaqoh[];
 }

@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
 import { sendError } from "../libs/error-handler";
-import TahunAjaranService from "../service/TahunAjaranService";
+import HafalanService from "../service/HafalanService";
 
-class TahunAjaranController {
+class HafalanController {
   async find(req: Request, res: Response) {
     try {
-      let { page = 1, pageSize = 10 } = req.query;
+      let { page = 1, pageSize = 10, type } = req.query;
+
+      if (type === "") type = null;
 
       const parsedPage = parseInt(page as string, 10);
       const parsedPageSize = parseInt(pageSize as string, 10);
@@ -18,70 +20,64 @@ class TahunAjaranController {
       ) {
         return res.status(400).json({ error: "Invalid pagination parameters" });
       }
-      const response = await TahunAjaranService.find(page, pageSize);
+      const response = await HafalanService.findAll(
+        parsedPage,
+        parsedPageSize,
+        type
+      );
       return res.status(200).json(response);
     } catch (error) {
       console.error("Error in find method:", error);
-      sendError(res, "Cannot get data tahun ajaran!");
+      sendError(res, "Cannot get data Hafalan!");
     }
   }
 
   async findOne(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const response = await TahunAjaranService.findOne(id);
+      const response = await HafalanService.findOne(id);
       return res.status(200).json(response);
     } catch (error) {
       console.error("Error in findOne method:", error);
-      sendError(res, "Cannot get data tahun ajaran!");
+      sendError(res, "Cannot get data Hafalan!");
     }
   }
 
   async create(req: Request, res: Response) {
     try {
-      const response = await TahunAjaranService.create(req.body);
+      let { type } = req.query;
+
+      if (type === "") type = null;
+      const response = await HafalanService.create(req.body, type);
       return res.status(201).json(response);
     } catch (err) {
       console.error("Error in create method:", err);
-      sendError(res, "Cannot create tahun ajaran!");
+      sendError(res, "Cannot create Hafalan!");
     }
   }
 
   async update(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const response = await TahunAjaranService.update(req.body, id);
+
+      const response = await HafalanService.update(req.body, id);
       return res.status(200).json(response);
     } catch (err) {
       console.error("Error in update method:", err);
-      sendError(res, "Cannot update data tahun ajaran!");
+      sendError(res, "Cannot update data halaqoh!");
     }
   }
 
   async delete(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const response = await TahunAjaranService.delete(id);
+      const response = await HafalanService.delete(id);
       return res.status(200).json(response);
     } catch (err) {
       console.error("Error in delete method:", err);
-      sendError(res, "Cannot delete data tahun ajaran!");
-    }
-  }
-
-  async dummy(req: Request, res: Response) {
-    try {
-      const dummyData = {
-        nama_tahun_ajaran: `TA 2020 - 2021 Ganjil`,
-        status: true,
-      };
-
-      const response = await TahunAjaranService.create(dummyData);
-      return res.status(201).json(response);
-    } catch (error) {
-      sendError(res, "Cannot create data User!");
+      sendError(res, "Cannot delete data halaqoh!");
     }
   }
 }
 
-export default new TahunAjaranController();
+export default new HafalanController();

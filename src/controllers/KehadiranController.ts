@@ -1,14 +1,16 @@
 import { Request, Response } from "express";
 import { sendError } from "../libs/error-handler";
-import HalaqohService from "../service/HalaqohService";
+import KehadiranService from "../service/KehadiranService";
 
-class HalaqohController {
+class KehadiranController {
   async find(req: Request, res: Response) {
     try {
-      let { page = 1, pageSize = 10 } = req.query;
+      let { page = 1, pageSize = 10, halaqoh } = req.query;
 
       const parsedPage = parseInt(page as string, 10);
       const parsedPageSize = parseInt(pageSize as string, 10);
+
+      if (halaqoh === "") halaqoh = null;
 
       if (
         isNaN(parsedPage) ||
@@ -18,39 +20,45 @@ class HalaqohController {
       ) {
         return res.status(400).json({ error: "Invalid pagination parameters" });
       }
-      const response = await HalaqohService.findAll(parsedPage, parsedPageSize);
+      const response = await KehadiranService.findAll(
+        parsedPage,
+        parsedPageSize,
+        halaqoh
+      );
       return res.status(200).json(response);
     } catch (error) {
       console.error("Error in find method:", error);
-      sendError(res, "Cannot get data halaqoh!");
+      sendError(res, "Cannot get data kehadiran!");
     }
   }
 
   async findOne(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const response = await HalaqohService.findOne(id);
+      const response = await KehadiranService.findOne(id);
       return res.status(200).json(response);
     } catch (error) {
       console.error("Error in findOne method:", error);
-      sendError(res, "Cannot get data halaqoh!");
+      sendError(res, "Cannot get data kehadiran!");
     }
   }
 
-  async create(req: Request, res: Response) {
-    try {
-      const response = await HalaqohService.create(req.body);
-      return res.status(201).json(response);
-    } catch (err) {
-      console.error("Error in create method:", err);
-      sendError(res, "Cannot create halaqoh!");
-    }
-  }
+  //   async create(req: Request, res: Response) {
+  //     try {
+  //       const response = await KehadiranService.create(req.body);
+  //       return res.status(201).json(response);
+  //     } catch (err) {
+  //       console.error("Error in create method:", err);
+  //       sendError(res, "Cannot create halaqoh!");
+  //     }
+  //   }
 
   async update(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const response = await HalaqohService.update(req.body, id);
+
+      let { meet, halaqohId } = req.query;
+      const response = await KehadiranService.update(req.body, meet, halaqohId);
       return res.status(200).json(response);
     } catch (err) {
       console.error("Error in update method:", err);
@@ -61,7 +69,7 @@ class HalaqohController {
   async delete(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const response = await HalaqohService.delete(id);
+      const response = await KehadiranService.delete(id);
       return res.status(200).json(response);
     } catch (err) {
       console.error("Error in delete method:", err);
@@ -70,4 +78,4 @@ class HalaqohController {
   }
 }
 
-export default new HalaqohController();
+export default new KehadiranController();

@@ -1,12 +1,31 @@
-import { Request, Response } from "express";
-import UserService from "../service/UserService";
 import { sendError } from "../libs/error-handler";
-import { createUserValidation, loginValidation } from "../libs/user-validation";
+import UserService from "../service/UserService";
+import { Request, Response } from "express";
 
 class UserController {
   async find(req: Request, res: Response) {
     try {
-      const response = await UserService.find();
+      let { role, page = 1, pageSize = 10, includeHalaqoh } = req.query;
+      if (role === "") role = null;
+
+      const parsedPage = parseInt(page as string, 10);
+      const parsedPageSize = parseInt(pageSize as string, 10);
+
+      if (
+        isNaN(parsedPage) ||
+        isNaN(parsedPageSize) ||
+        parsedPage < 1 ||
+        parsedPageSize < 1
+      ) {
+        return res.status(400).json({ error: "Invalid pagination parameters" });
+      }
+
+      const response = await UserService.findAll(
+        role,
+        parsedPage,
+        parsedPageSize,
+        includeHalaqoh
+      );
       return res.status(200).json(response);
     } catch (error) {
       console.error("Error in find method:", error);
@@ -16,72 +35,56 @@ class UserController {
 
   async findOne(req: Request, res: Response) {
     try {
-      const id = req.params.id;
+      const id = Number(req.params.id);
       const response = await UserService.findOne(id);
       return res.status(200).json(response);
     } catch (error) {
-      console.error("Error in findOne method:", error);
-      sendError(res, "Cannot get data User!");
+      console.error("Error in find method:", error);
+      sendError(res, "Cannot get data Users!");
     }
   }
 
   async create(req: Request, res: Response) {
     try {
-      // Validate user input
-      const { error } = createUserValidation.validate(req.body);
-      if (error) {
-        return res.status(400).json({
-          error: "Validation error",
-          details: error.details[0].message,
-        });
-      }
-
       const response = await UserService.create(req.body);
-      if (response.message === "Email already registered!") {
-        // Handle the case where UserService.create returns an error
-        sendError(res, response.message, 400); // 400 Bad Request
-        return;
-      } else {
-        return res.status(201).json(response); // 201 Created
-      }
-    } catch (err) {
-      console.error("Error in create method:", err);
+      return res.status(201).json(response);
+    } catch (error) {
       sendError(res, "Cannot create data User!");
     }
   }
 
   async update(req: Request, res: Response) {
     try {
-      const id = req.params.id;
-      const response = await UserService.update(req.body, id);
+      const id = Number(req.params.id);
+      const response = await UserService.update(id, req.body);
       return res.status(200).json(response);
-    } catch (err) {
-      console.error("Error in update method:", err);
-      sendError(res, "Cannot update data User!");
+    } catch (error) {
+      console.error("Error in find method:", error);
+      sendError(res, "Cannot get data Users!");
     }
   }
 
   async delete(req: Request, res: Response) {
     try {
-      const id = req.params.id;
+      const id = Number(req.params.id);
       const response = await UserService.delete(id);
       return res.status(200).json(response);
-    } catch (err) {
-      console.error("Error in delete method:", err);
-      sendError(res, "Cannot delete data User!");
+    } catch (error) {
+      console.error("Error in find method:", error);
+      sendError(res, "Cannot get data Users!");
     }
   }
 
   async login(req: Request, res: Response) {
     try {
       // Validate user input
-      const { error } = loginValidation.validate(req.body);
-      if (error) {
-        return res.status(400).json({
-          error: "Validation error",
-          details: error.details[0].message,
-        });
-      }
+      //   const { error } = loginValidation.validate(req.body);
+      //   if (error) {
+      //     return res.status(400).json({
+      //       error: "Validation error",
+      //       details: error.details[0].message,
+      //     });
+      //   }
 
       const response = await UserService.login(req.body);
 
@@ -97,6 +100,42 @@ class UserController {
     } catch (err) {
       console.error("Error in login method:", err);
       sendError(res, "Failed login users!");
+    }
+  }
+
+  async dummy(req: Request, res: Response) {
+    try {
+      const random = new Date().getTime();
+      const { role } = req.query;
+      const dummyData = {
+        username: `john_doe${random}`,
+        password: "password123",
+        role: role, // or 'guru' or 'siswa'
+        nama_lengkap: "John Doe",
+        alamat: "123 Main Street",
+        email: `john.doe@example.com`,
+        jenis_kelamin: "male",
+        nomor_induk: "123456",
+        nomor_telepon: "123-456-7890",
+        posisi: "teacher",
+        tanggal_bergabung: "2024-01-30", // Date in YYYY-MM-DD format
+        tanggal_lahir: "1990-01-01", // Date in YYYY-MM-DD format
+        tempat_lahir: "Cityville",
+        foto: "path/to/photo.jpg",
+        status: "active",
+        // Additional fields for 'siswa' role
+        nama_ayah: "Doe Sr.",
+        nama_ibu: "Doe Mrs.",
+        nomor_telepon_ayah: "111-222-3333",
+        nomor_telepon_ibu: "444-555-6666",
+        pekerjaan_ayah: "Engineer",
+        pekerjaan_ibu: "Doctor",
+      };
+
+      const response = await UserService.create(dummyData);
+      return res.status(201).json(response);
+    } catch (error) {
+      sendError(res, "Cannot create data User!");
     }
   }
 }

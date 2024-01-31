@@ -4,9 +4,16 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
 } from "typeorm";
+import { User } from "./Users";
+import { Kehadiran } from "./Kehadiran";
+import { TahunAjaran } from "./TahunAjaran";
 
-@Entity({ name: "data_halaqoh" })
+@Entity({ name: "halaqoh" })
 export class Halaqoh {
   @PrimaryGeneratedColumn()
   id: number;
@@ -14,14 +21,12 @@ export class Halaqoh {
   @Column()
   nama_halaqoh: string;
 
-  @Column()
-  tahun_ajaran: string;
+  @ManyToOne(() => TahunAjaran)
+  tahun_ajaran: TahunAjaran;
 
-  @Column()
-  nama_guru: string;
-
-  @Column("json")
-  nama_anggota: JSON;
+  @ManyToOne(() => User) // ManyToOne relationship with User (guru)
+  @JoinColumn({ name: "guruId" }) // Specify the join column
+  guru: User;
 
   @Column({ default: false })
   status: boolean;
@@ -31,4 +36,8 @@ export class Halaqoh {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => Kehadiran, (kehadiran) => kehadiran.halaqoh)
+  @JoinColumn()
+  kehadiran: Kehadiran[];
 }

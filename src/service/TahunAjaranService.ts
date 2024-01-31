@@ -7,9 +7,12 @@ class TahunAjaranService {
   private readonly tahunAjaranRepository: Repository<TahunAjaran> =
     AppDataSource.getRepository(TahunAjaran);
 
-  async find(): Promise<any> {
+  async find(page?: any, pageSize?: any): Promise<any> {
     try {
-      const tahunAjaran = await this.tahunAjaranRepository.find();
+      const tahunAjaran = await this.tahunAjaranRepository.find({
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+      });
       return {
         message: "Successfully Get Tahun Ajaran",
         data: tahunAjaran,
@@ -26,6 +29,13 @@ class TahunAjaranService {
           id: id,
         },
       });
+
+      if (!tahunAjaran) {
+        return {
+          message: "Tahun Ajaran not found",
+        };
+      }
+
       return {
         message: "Successfully Get Tahun Ajaran",
         data: tahunAjaran,
@@ -47,7 +57,7 @@ class TahunAjaranService {
       }
 
       const tahunAjaran = this.tahunAjaranRepository.create({
-        nama_tahun_ajaran: reqBody.nama_lengkap,
+        nama_tahun_ajaran: reqBody.nama_tahun_ajaran,
         status: reqBody.status,
       });
 
@@ -71,8 +81,9 @@ class TahunAjaranService {
         },
       });
 
-      tahunAjaran.nama_tahun_ajaran = reqBody.nama_lengkap;
-      tahunAjaran.status = reqBody.status;
+      tahunAjaran.nama_tahun_ajaran =
+        reqBody.nama_tahun_ajaran || tahunAjaran.nama_tahun_ajaran;
+      tahunAjaran.status = reqBody.status || tahunAjaran.status;
 
       const tahunAjaranUpdate = await this.tahunAjaranRepository.save(
         tahunAjaran
@@ -88,7 +99,19 @@ class TahunAjaranService {
 
   async delete(id: any): Promise<any> {
     try {
-      await this.tahunAjaranRepository.delete(id);
+      const tahunAjaran = await this.tahunAjaranRepository.findOne({
+        where: {
+          id: id,
+        },
+      });
+
+      if (!tahunAjaran) {
+        return {
+          message: "Tahun Ajaran not found",
+        };
+      }
+
+      await this.tahunAjaranRepository.remove(tahunAjaran);
 
       return {
         message: "Tahun Ajaran deleted successfully!",

@@ -1,27 +1,30 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { User } from "./Users";
 
-@Entity({ name: "data_siswa" })
-export class Siswa {
+@Entity({ name: "profile" })
+export class Profile {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
   nama_lengkap: string;
 
-  @Column()
-  username: string;
+  // @Column()
+  // username: string;
+
+  // @Column()
+  // password: string;
 
   @Column()
-  password: string;
-
-  @Column()
-  NIS: string;
+  nomor_induk: string;
 
   @Column()
   tempat_lahir: string;
@@ -59,9 +62,25 @@ export class Siswa {
   @Column({ default: false })
   status: boolean;
 
+  @Column()
+  email: string;
+
+  @Column()
+  nomor_telepon: string;
+
+  @Column()
+  posisi: string;
+
+  @Column()
+  tanggal_bergabung: string;
+
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToOne(() => Profile, { cascade: true })
+  @JoinColumn()
+  user: User;
 }
