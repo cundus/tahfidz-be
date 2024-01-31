@@ -1,0 +1,643 @@
+{
+	"info": {
+		"_postman_id": "eb5b096e-c1b4-49bf-ae64-fa1fb0785ae0",
+		"name": "Tahfidz",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28762169"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "get all user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users?role=siswa&page=1&pageSize=10&includeHalaqoh=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "siswa"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "includeHalaqoh",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/users/3"
+					},
+					"response": []
+				},
+				{
+					"name": "post user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"john_doe3\",\r\n  \"password\": \"secure_password3\",\r\n  \"role\": \"siswa\",\r\n  \"nama_lengkap\": \"John Doe234\",\r\n  \"alamat\": \"123 Main Street2\",\r\n  \"email\": \"john.doe@example.com2\",\r\n  \"jenis_kelamin\": \"male2\",\r\n  \"nomor_induk\": \"1234562\",\r\n  \"nomor_telepon\": \"123-456-78902\",\r\n  \"posisi\": \"Student\",\r\n  \"tanggal_bergabung\": \"2022-01-01\",\r\n  \"tanggal_lahir\": \"1990-01-01\",\r\n  \"tempat_lahir\": \"City\",\r\n  \"foto\": \"base64_encoded_image\", // replace with the actual base64 encoded image data\r\n  \"status\": true,\r\n  \"nama_ayah\": \"John Doe Sr.\",\r\n  \"nama_ibu\": \"Jane Doe\",\r\n  \"nomor_telepon_ayah\": \"123-456-7891\",\r\n  \"nomor_telepon_ibu\": \"123-456-7892\",\r\n  \"pekerjaan_ayah\": \"Engineer\",\r\n  \"pekerjaan_ibu\": \"Teacher\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/users"
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"operator_user2\",\r\n  \"password\": \"secure_password2\",\r\n  \"role\": \"operator2\",\r\n  \"nama_lengkap\": \"Operator User2\",\r\n  \"alamat\": \"456 Main Street2\",\r\n  \"email\": \"operator.user@example.com\",\r\n  \"jenis_kelamin\": \"female\",\r\n  \"nomor_induk\": \"789012\",\r\n  \"nomor_telepon\": \"987-654-3210\",\r\n  \"posisi\": \"Operator\",\r\n  \"tanggal_bergabung\": \"2022-02-01\",\r\n  \"tanggal_lahir\": \"1985-05-15\",\r\n  \"tempat_lahir\": \"Town\",\r\n  \"foto\": \"base64_encoded_image_operator\", // replace with the actual base64 encoded image data\r\n  \"status\": true\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/users/3"
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/api/users/4"
+					},
+					"response": []
+				},
+				{
+					"name": "login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"john_doe3\",\r\n    \"password\": \"secure_password3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/login"
+					},
+					"response": []
+				},
+				{
+					"name": "dummy user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/dummy?role=guru",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"dummy"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "guru"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tahun Ajaran",
+			"item": [
+				{
+					"name": "get all tahun ajaran",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/tahunAjaran?page=1&pageSize=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tahunAjaran"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get tahun ajaran",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/tahunAjaran/2"
+					},
+					"response": []
+				},
+				{
+					"name": "post tahun ajaran",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama_tahun_ajaran\": \"lorem ipsum\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/tahunAjaran"
+					},
+					"response": []
+				},
+				{
+					"name": "update tahun ajaran",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama_tahun_ajaran\": \"lorem ipsum123\",\r\n    \"status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/tahunAjaran/2"
+					},
+					"response": []
+				},
+				{
+					"name": "delete tahun ajaran",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/api/tahunAjaran/4"
+					},
+					"response": []
+				},
+				{
+					"name": "dummy tahun ajaran",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:3000/api/tahunAjaran/dummy"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Halaqoh",
+			"item": [
+				{
+					"name": "get all halaqoh",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/halaqoh?page=1&pageSize=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"halaqoh"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get halaqoh",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/halaqoh/1"
+					},
+					"response": []
+				},
+				{
+					"name": "create halaqoh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama_halaqoh\": \"Halaqoh Example321dsfdsf321312\",\r\n    \"tahun_ajaran\": 1,\r\n    \"guruId\": 5, // ID of the guru user\r\n    \"siswaIds\": [2] // Array of IDs of siswa users\r\n}   ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/halaqoh"
+					},
+					"response": []
+				},
+				{
+					"name": "update halaqoh",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama_halaqoh\": \"Halaqoh 234 123123\",\r\n    \"tahun_ajaran\": 1,\r\n    \"guruId\": 5, // ID of the guru user\r\n    \"siswaIds\": [3,4] // Array of IDs of siswa users\r\n}   ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/halaqoh/1"
+					},
+					"response": []
+				},
+				{
+					"name": "delete halaqoh",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/api/halaqoh/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Kehadiran",
+			"item": [
+				{
+					"name": "get all kehadiran by halaqoh",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/kehadiran?page=1&pageSize=10&halaqoh=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"kehadiran"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "halaqoh",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get kehadiran",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/kehadiran/40"
+					},
+					"response": []
+				},
+				{
+					"name": "update kehadiran",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\": 3,\r\n        \"status\": \"Izin\",\r\n        \"tanggal\": \"2025-01-31\"\r\n    },\r\n    {\r\n        \"id\": 4,\r\n        \"status\": \"Sakit\",\r\n        \"tanggal\": \"2025-01-30\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/kehadiran?&meet=2&halaqohId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"kehadiran"
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null
+								},
+								{
+									"key": "meet",
+									"value": "2"
+								},
+								{
+									"key": "halaqohId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete kehadiran",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/api/kehadiran/44"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hafalan",
+			"item": [
+				{
+					"name": "get all hafalan",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/hafalan?page=1&pageSize=10&type=manzil",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"hafalan"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "type",
+									"value": "manzil"
+								},
+								{
+									"key": "type",
+									"value": "sabq",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get hafalan",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/hafalan/3"
+					},
+					"response": []
+				},
+				{
+					"name": "post hafalan",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"baris\": \"5 baris\",\r\n    \"ayat_awal\": \"abcde\",\r\n    \"ayat_akhir\": \"edcba\",\r\n    \"surat_awal\": \"abcde\",\r\n    \"surat_akhir\": \"edcba\",\r\n    \"nilai_hafalan\": \"A\",\r\n    \"nilai_tajwid\": \"B\",\r\n    \"siswaId\": 2,\r\n    \"halaqohId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/hafalan?type=manzil",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"hafalan"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "manzil"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update hafalan",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"baris\": \"5 baris\",\r\n    \"ayat_awal\": \"abcde1\",\r\n    \"ayat_akhir\": \"edcba1\",\r\n    \"surat_awal\": \"abcde\",\r\n    \"surat_akhir\": \"edcba\",\r\n    \"nilai_hafalan\": \"A1\",\r\n    \"nilai_tajwid\": \"B1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/hafalan/3"
+					},
+					"response": []
+				},
+				{
+					"name": "delete hafalan",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/api/hafalan/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ujian",
+			"item": [
+				{
+					"name": "get all ujian",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/ujian?page=1&pageSize=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ujian"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get ujian",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/ujian/1"
+					},
+					"response": []
+				},
+				{
+					"name": "post ujian",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tanggal\": \"2004-12-25\",\r\n    \"juz\": 1,\r\n    \"kesalahan_hafalan\": 2,\r\n    \"kesalahan_tajwid\": 3,\r\n    \"keterangan\": \"lolrem ipsum\",\r\n    \"nilai_hafalan\": 60,\r\n    \"nilai_tajwid\": 70,\r\n    \"total_nilai\": 70,\r\n    \"penguji\": \"Jumiadi\",\r\n    \"siswaId\": 2,\r\n    \"halaqohId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/ujian"
+					},
+					"response": []
+				},
+				{
+					"name": "update ujian",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tanggal\": \"2004-12-25\",\r\n    \"juz\": 2,\r\n    \"kesalahan_hafalan\": 2,\r\n    \"kesalahan_tajwid\": 3,\r\n    \"keterangan\": \"lorem ipsum\",\r\n    \"nilai_hafalan\": 60,\r\n    \"nilai_tajwid\": 70,\r\n    \"total_nilai\": 70,\r\n    \"penguji\": \"Jumiadi\",\r\n    \"siswaId\": 2,\r\n    \"halaqohId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/ujian/1"
+					},
+					"response": []
+				},
+				{
+					"name": "delete hafalan Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/api/ujian/2"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
