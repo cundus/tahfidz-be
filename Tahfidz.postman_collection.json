@@ -15,7 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/users?role=siswa&page=1&pageSize=10&includeHalaqoh=true",
+							"raw": "http://localhost:3000/api/users?page=1&pageSize=10&role=guru",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -27,10 +27,6 @@
 							],
 							"query": [
 								{
-									"key": "role",
-									"value": "siswa"
-								},
-								{
 									"key": "page",
 									"value": "1"
 								},
@@ -40,7 +36,12 @@
 								},
 								{
 									"key": "includeHalaqoh",
-									"value": "true"
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "guru"
 								}
 							]
 						}
@@ -52,7 +53,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:3000/api/users/3"
+						"url": "http://localhost:3000/api/users/8"
 					},
 					"response": []
 				},
@@ -62,13 +63,79 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"username\": \"john_doe3\",\r\n  \"password\": \"secure_password3\",\r\n  \"role\": \"siswa\",\r\n  \"nama_lengkap\": \"John Doe234\",\r\n  \"alamat\": \"123 Main Street2\",\r\n  \"email\": \"john.doe@example.com2\",\r\n  \"jenis_kelamin\": \"male2\",\r\n  \"nomor_induk\": \"1234562\",\r\n  \"nomor_telepon\": \"123-456-78902\",\r\n  \"posisi\": \"Student\",\r\n  \"tanggal_bergabung\": \"2022-01-01\",\r\n  \"tanggal_lahir\": \"1990-01-01\",\r\n  \"tempat_lahir\": \"City\",\r\n  \"foto\": \"base64_encoded_image\", // replace with the actual base64 encoded image data\r\n  \"status\": true,\r\n  \"nama_ayah\": \"John Doe Sr.\",\r\n  \"nama_ibu\": \"Jane Doe\",\r\n  \"nomor_telepon_ayah\": \"123-456-7891\",\r\n  \"nomor_telepon_ibu\": \"123-456-7892\",\r\n  \"pekerjaan_ayah\": \"Engineer\",\r\n  \"pekerjaan_ibu\": \"Teacher\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_lengkap",
+									"value": "bagas",
+									"type": "text"
+								},
+								{
+									"key": "alamat",
+									"value": "lampung",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "bagas@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "bagas3",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "bagas4",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "guru",
+									"type": "text"
+								},
+								{
+									"key": "jenis_kelamin",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "nomor_induk",
+									"value": "866392",
+									"type": "text"
+								},
+								{
+									"key": "nomor_telepon",
+									"value": "0877124782",
+									"type": "text"
+								},
+								{
+									"key": "posisi",
+									"value": "pegawai",
+									"type": "text"
+								},
+								{
+									"key": "tanggal_bergabung",
+									"value": "2024-10-2",
+									"type": "text"
+								},
+								{
+									"key": "tanggal_lahir",
+									"value": "2024-10-2",
+									"type": "text"
+								},
+								{
+									"key": "tempat_lahir",
+									"value": "malang",
+									"type": "text"
+								},
+								{
+									"key": "foto",
+									"type": "file",
+									"src": "/C:/Users/Bagas/Pictures/Screenshot (123).png"
 								}
-							}
+							]
 						},
 						"url": "http://localhost:3000/api/users"
 					},
@@ -80,15 +147,81 @@
 						"method": "PUT",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"username\": \"operator_user2\",\r\n  \"password\": \"secure_password2\",\r\n  \"role\": \"operator2\",\r\n  \"nama_lengkap\": \"Operator User2\",\r\n  \"alamat\": \"456 Main Street2\",\r\n  \"email\": \"operator.user@example.com\",\r\n  \"jenis_kelamin\": \"female\",\r\n  \"nomor_induk\": \"789012\",\r\n  \"nomor_telepon\": \"987-654-3210\",\r\n  \"posisi\": \"Operator\",\r\n  \"tanggal_bergabung\": \"2022-02-01\",\r\n  \"tanggal_lahir\": \"1985-05-15\",\r\n  \"tempat_lahir\": \"Town\",\r\n  \"foto\": \"base64_encoded_image_operator\", // replace with the actual base64 encoded image data\r\n  \"status\": true\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_lengkap",
+									"value": "bagas",
+									"type": "text"
+								},
+								{
+									"key": "alamat",
+									"value": "lampung",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "bagas@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "bagas32",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "bagas42",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "guru",
+									"type": "text"
+								},
+								{
+									"key": "jenis_kelamin",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "nomor_induk",
+									"value": "866392",
+									"type": "text"
+								},
+								{
+									"key": "nomor_telepon",
+									"value": "0877124782",
+									"type": "text"
+								},
+								{
+									"key": "posisi",
+									"value": "pegawai",
+									"type": "text"
+								},
+								{
+									"key": "tanggal_bergabung",
+									"value": "2024-10-2",
+									"type": "text"
+								},
+								{
+									"key": "tanggal_lahir",
+									"value": "2024-10-2",
+									"type": "text"
+								},
+								{
+									"key": "tempat_lahir",
+									"value": "pekalongan",
+									"type": "text"
+								},
+								{
+									"key": "foto",
+									"type": "file",
+									"src": "/C:/Users/Bagas/Downloads/103878193.jpg"
 								}
-							}
+							]
 						},
-						"url": "http://localhost:3000/api/users/3"
+						"url": "http://localhost:3000/api/users/8"
 					},
 					"response": []
 				},
@@ -97,7 +230,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:3000/api/users/4"
+						"url": "http://localhost:3000/api/users/8"
 					},
 					"response": []
 				},
@@ -108,7 +241,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"john_doe3\",\r\n    \"password\": \"secure_password3\"\r\n}",
+							"raw": "{\r\n    \"username\": \"bagas1\",\r\n    \"password\": \"bagas2\",\r\n    \"role\": \"guru\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -145,6 +278,21 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "check user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2LCJ1c2VybmFtZSI6ImpvaG5fZG9lMyIsInBhc3N3b3JkIjoiJDJiJDEwJGFlYkxERWxJNDRLc0JLaVQ1dldieC5Gam8wN3U1dHBiakE3NVVhcHBHcm45WjJVNExUNmtTIiwicm9sZSI6InNpc3dhIiwiY3JlYXRlZEF0IjoiMjAyNC0wMS0zMVQxNDowMTo0NC43MTFaIiwidXBkYXRlZEF0IjoiMjAyNC0wMS0zMVQxNDowMTo0NC43MTFaIiwicHJvZmlsZSI6eyJpZCI6NiwibmFtYV9sZW5na2FwIjoiSm9obiBEb2UyMzQiLCJub21vcl9pbmR1ayI6IjEyMzQ1NjIiLCJ0ZW1wYXRfbGFoaXIiOiJDaXR5IiwidGFuZ2dhbF9sYWhpciI6IjE5ODktMTItMzFUMTc6MDA6MDAuMDAwWiIsImplbmlzX2tlbGFtaW4iOiJtYWxlMiIsImFsYW1hdCI6IjEyMyBNYWluIFN0cmVldDIiLCJmb3RvIjoiYmFzZTY0X2VuY29kZWRfaW1hZ2UiLCJuYW1hX2F5YWgiOiJKb2huIERvZSBTci4iLCJuYW1hX2lidSI6IkphbmUgRG9lIiwibm9tb3JfdGVsZXBvbl9heWFoIjoiMTIzLTQ1Ni03ODkxIiwibm9tb3JfdGVsZXBvbl9pYnUiOiIxMjMtNDU2LTc4OTIiLCJwZWtlcmphYW5fYXlhaCI6IkVuZ2luZWVyIiwicGVrZXJqYWFuX2lidSI6IlRlYWNoZXIiLCJzdGF0dXMiOnRydWUsImVtYWlsIjoiam9obi5kb2VAZXhhbXBsZS5jb20yIiwibm9tb3JfdGVsZXBvbiI6IjEyMy00NTYtNzg5MDIiLCJwb3Npc2kiOiJTdHVkZW50IiwidGFuZ2dhbF9iZXJnYWJ1bmciOiIyMDIyLTAxLTAxIiwiY3JlYXRlZEF0IjoiMjAyNC0wMS0zMVQxNDowMTo0NC42MzdaIiwidXBkYXRlZEF0IjoiMjAyNC0wMS0zMVQxNDowMTo0NC4wMDBaIn19LCJpYXQiOjE3MDY3MTcxMzEsImV4cCI6MTcwNjgwMzUzMX0.Mi3WYktlH5g0GlQxMMEGDe8z4L73hYqqIDeLYI9MW90"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:3000/api/check"
+					},
+					"response": []
 				}
 			]
 		},
@@ -157,7 +305,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/tahunAjaran?page=1&pageSize=10",
+							"raw": "http://localhost:3000/api/tahun-ajaran?page=1&pageSize=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -165,7 +313,7 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"tahunAjaran"
+								"tahun-ajaran"
 							],
 							"query": [
 								{
@@ -186,7 +334,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:3000/api/tahunAjaran/2"
+						"url": "http://localhost:3000/api/tahun-ajaran/2"
 					},
 					"response": []
 				},
@@ -197,14 +345,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nama_tahun_ajaran\": \"lorem ipsum\"\r\n}",
+							"raw": "{\r\n    \"nama_tahun_ajaran\": \"PDI\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:3000/api/tahunAjaran"
+						"url": "http://localhost:3000/api/tahun-ajaran"
 					},
 					"response": []
 				},
@@ -215,14 +363,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nama_tahun_ajaran\": \"lorem ipsum123\",\r\n    \"status\": true\r\n}",
+							"raw": "{\r\n    \"nama_tahun_ajaran\": \"GERINDRA\",\r\n    \"status\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:3000/api/tahunAjaran/2"
+						"url": "http://localhost:3000/api/tahun-ajaran/2"
 					},
 					"response": []
 				},
@@ -231,7 +379,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:3000/api/tahunAjaran/4"
+						"url": "http://localhost:3000/api/tahun-ajaran/2"
 					},
 					"response": []
 				},
@@ -240,7 +388,7 @@
 					"request": {
 						"method": "POST",
 						"header": [],
-						"url": "http://localhost:3000/api/tahunAjaran/dummy"
+						"url": "http://localhost:3000/api/tahun-ajaran/dummy"
 					},
 					"response": []
 				}
@@ -284,7 +432,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:3000/api/halaqoh/1"
+						"url": "http://localhost:3000/api/halaqoh/3"
 					},
 					"response": []
 				},
@@ -295,7 +443,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nama_halaqoh\": \"Halaqoh Example321dsfdsf321312\",\r\n    \"tahun_ajaran\": 1,\r\n    \"guruId\": 5, // ID of the guru user\r\n    \"siswaIds\": [2] // Array of IDs of siswa users\r\n}   ",
+							"raw": "{\r\n    \"nama_halaqoh\": \"Halaqoh KITA\",\r\n    \"tahun_ajaran\": 1,\r\n    \"guruId\": 7, // ID of the guru user\r\n    \"siswaIds\": [6] // Array of IDs of siswa users\r\n}   ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -313,14 +461,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nama_halaqoh\": \"Halaqoh 234 123123\",\r\n    \"tahun_ajaran\": 1,\r\n    \"guruId\": 5, // ID of the guru user\r\n    \"siswaIds\": [3,4] // Array of IDs of siswa users\r\n}   ",
+							"raw": "{\r\n    \"nama_halaqoh\": \"Halaqoh 234 asdasdasd\",\r\n    \"tahun_ajaran\": 1,\r\n    \"guruId\": 6, // ID of the guru user\r\n    \"siswaIds\": [2] // Array of IDs of siswa users\r\n}   ",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:3000/api/halaqoh/1"
+						"url": "http://localhost:3000/api/halaqoh/3"
 					},
 					"response": []
 				},
@@ -329,7 +477,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:3000/api/halaqoh/2"
+						"url": "http://localhost:3000/api/halaqoh/3"
 					},
 					"response": []
 				}
@@ -460,7 +608,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:3000/api/kehadiran/44"
+						"url": "http://localhost:3000/api/kehadiran/51"
 					},
 					"response": []
 				}
@@ -532,7 +680,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/hafalan?type=manzil",
+							"raw": "http://localhost:3000/api/hafalan?type=sabq",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -545,7 +693,7 @@
 							"query": [
 								{
 									"key": "type",
-									"value": "manzil"
+									"value": "sabq"
 								}
 							]
 						}
@@ -559,14 +707,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"baris\": \"5 baris\",\r\n    \"ayat_awal\": \"abcde1\",\r\n    \"ayat_akhir\": \"edcba1\",\r\n    \"surat_awal\": \"abcde\",\r\n    \"surat_akhir\": \"edcba\",\r\n    \"nilai_hafalan\": \"A1\",\r\n    \"nilai_tajwid\": \"B1\"\r\n}",
+							"raw": "{\r\n    \"baris\": \"4 baris\",\r\n    \"ayat_awal\": \"abcde1\",\r\n    \"ayat_akhir\": \"edcba1\",\r\n    \"surat_awal\": \"abcde\",\r\n    \"surat_akhir\": \"edcba\",\r\n    \"nilai_hafalan\": \"A1\",\r\n    \"nilai_tajwid\": \"B1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:3000/api/hafalan/3"
+						"url": "http://localhost:3000/api/hafalan/4"
 					},
 					"response": []
 				},
@@ -575,7 +723,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:3000/api/hafalan/1"
+						"url": "http://localhost:3000/api/hafalan/4"
 					},
 					"response": []
 				}
@@ -619,7 +767,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:3000/api/ujian/1"
+						"url": "http://localhost:3000/api/ujian/4"
 					},
 					"response": []
 				},
@@ -630,7 +778,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"tanggal\": \"2004-12-25\",\r\n    \"juz\": 1,\r\n    \"kesalahan_hafalan\": 2,\r\n    \"kesalahan_tajwid\": 3,\r\n    \"keterangan\": \"lolrem ipsum\",\r\n    \"nilai_hafalan\": 60,\r\n    \"nilai_tajwid\": 70,\r\n    \"total_nilai\": 70,\r\n    \"penguji\": \"Jumiadi\",\r\n    \"siswaId\": 2,\r\n    \"halaqohId\": 1\r\n}",
+							"raw": "{\r\n    \"tanggal\": \"2014-12-25\",\r\n    \"juz\": 30,\r\n    \"kesalahan_hafalan\": 2,\r\n    \"kesalahan_tajwid\": 3,\r\n    \"keterangan\": \"cundus\",\r\n    \"nilai_hafalan\": 100,\r\n    \"nilai_tajwid\": 100,\r\n    \"total_nilai\": 100,\r\n    \"penguji\": \"Eko\",\r\n    \"siswaId\": 6,\r\n    \"halaqohId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -648,23 +796,155 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"tanggal\": \"2004-12-25\",\r\n    \"juz\": 2,\r\n    \"kesalahan_hafalan\": 2,\r\n    \"kesalahan_tajwid\": 3,\r\n    \"keterangan\": \"lorem ipsum\",\r\n    \"nilai_hafalan\": 60,\r\n    \"nilai_tajwid\": 70,\r\n    \"total_nilai\": 70,\r\n    \"penguji\": \"Jumiadi\",\r\n    \"siswaId\": 2,\r\n    \"halaqohId\": 1\r\n}",
+							"raw": "{\r\n    \"tanggal\": \"2020-12-25\",\r\n    \"juz\": 8,\r\n    \"kesalahan_hafalan\": 2,\r\n    \"kesalahan_tajwid\": 3,\r\n    \"keterangan\": \"lorem ipsum\",\r\n    \"nilai_hafalan\": 60,\r\n    \"nilai_tajwid\": 70,\r\n    \"total_nilai\": 70,\r\n    \"penguji\": \"NANA\",\r\n    \"siswaId\": 2,\r\n    \"halaqohId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:3000/api/ujian/1"
+						"url": "http://localhost:3000/api/ujian/4"
 					},
 					"response": []
 				},
 				{
-					"name": "delete hafalan Copy",
+					"name": "delete ujian",
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:3000/api/ujian/2"
+						"url": "http://localhost:3000/api/ujian/4"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sekolah",
+			"item": [
+				{
+					"name": "get all sekolah",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/sekolah"
+					},
+					"response": []
+				},
+				{
+					"name": "get sekolah",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/sekolah/2"
+					},
+					"response": []
+				},
+				{
+					"name": "create sekolah",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_sekolah",
+									"value": "dumbways",
+									"type": "text"
+								},
+								{
+									"key": "nomor_telepon",
+									"value": "08828368721",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "mail@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "website",
+									"value": "lorem.com",
+									"type": "text"
+								},
+								{
+									"key": "alamat",
+									"value": "lampung",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "logo",
+									"type": "file",
+									"src": "/C:/Users/Bagas/Downloads/__patchouli_knowledge_touhou_drawn_by_rokugou_daisuke__sample-538334b596c261d4f8614b556437dc94.jpg"
+								}
+							]
+						},
+						"url": "http://localhost:3000/api/sekolah"
+					},
+					"response": []
+				},
+				{
+					"name": "update sekolah",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_sekolah",
+									"value": "dumbways",
+									"type": "text"
+								},
+								{
+									"key": "nomor_telepon",
+									"value": "08828368721",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "mail@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "website",
+									"value": "lorem.com",
+									"type": "text"
+								},
+								{
+									"key": "alamat",
+									"value": "lampung",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "logo",
+									"type": "file",
+									"src": "/C:/Users/Bagas/Downloads/home.png"
+								}
+							]
+						},
+						"url": "http://localhost:3000/api/sekolah/2"
+					},
+					"response": []
+				},
+				{
+					"name": "delete sekolah",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/api/sekolah/2"
 					},
 					"response": []
 				}

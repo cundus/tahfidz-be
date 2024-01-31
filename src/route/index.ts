@@ -11,6 +11,7 @@ import HalaqohController from "../controllers/HalaqohController";
 import KehadiranController from "../controllers/KehadiranController";
 import HafalanController from "../controllers/HafalanController";
 import UjianController from "../controllers/UjianController";
+import { upload } from "../libs/FileUpload";
 
 const router = express.Router();
 
@@ -21,10 +22,11 @@ router.get("/", (req: Request, res: Response) => {
 // User routes
 router.get("/users", UserController.find);
 router.get("/users/:id", UserController.findOne);
-router.put("/users/:id", UserController.update);
+router.put("/users/:id", upload("foto"), UserController.update);
 router.delete("/users/:id", UserController.delete);
-router.post("/users", UserController.create);
+router.post("/users", upload("foto"), UserController.create);
 router.post("/login", UserController.login);
+router.get("/check", auth, UserController.check);
 router.post("/users/dummy", UserController.dummy);
 
 // // Post routes
@@ -45,8 +47,8 @@ router.post("/tahun-ajaran/dummy", TahunAjaranController.dummy);
 // Sekolah routes
 router.get("/sekolah", SekolahController.find);
 router.get("/sekolah/:id", SekolahController.findOne);
-router.post("/sekolah", SekolahController.create);
-router.put("/sekolah/:id", SekolahController.update);
+router.post("/sekolah", upload("logo"), SekolahController.create);
+router.put("/sekolah/:id", upload("logo"), SekolahController.update);
 router.delete("/sekolah/:id", SekolahController.delete);
 
 // Halaqoh routes

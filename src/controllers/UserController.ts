@@ -5,7 +5,7 @@ import { Request, Response } from "express";
 class UserController {
   async find(req: Request, res: Response) {
     try {
-      let { role, page = 1, pageSize = 10, includeHalaqoh } = req.query;
+      let { role, page = 1, pageSize = 10 } = req.query;
       if (role === "") role = null;
 
       const parsedPage = parseInt(page as string, 10);
@@ -23,8 +23,7 @@ class UserController {
       const response = await UserService.findAll(
         role,
         parsedPage,
-        parsedPageSize,
-        includeHalaqoh
+        parsedPageSize
       );
       return res.status(200).json(response);
     } catch (error) {
@@ -46,7 +45,9 @@ class UserController {
 
   async create(req: Request, res: Response) {
     try {
-      const response = await UserService.create(req.body);
+      const filename = res.locals.filename;
+
+      const response = await UserService.create(req.body, filename);
       return res.status(201).json(response);
     } catch (error) {
       sendError(res, "Cannot create data User!");
@@ -56,7 +57,8 @@ class UserController {
   async update(req: Request, res: Response) {
     try {
       const id = Number(req.params.id);
-      const response = await UserService.update(id, req.body);
+      const filename = res.locals.filename;
+      const response = await UserService.update(id, req.body, filename);
       return res.status(200).json(response);
     } catch (error) {
       console.error("Error in find method:", error);
@@ -137,6 +139,17 @@ class UserController {
       return res.status(201).json(response);
     } catch (error) {
       sendError(res, "Cannot create data User!");
+    }
+  }
+
+  async check(req: Request, res: Response) {
+    try {
+      const jwtUser = res.locals.loginSession;
+      const response = await UserService.check(jwtUser);
+      return res.status(200).json(response);
+    } catch (error) {
+      console.error("Error in find method:", error);
+      sendError(res, "Cannot get data Users!");
     }
   }
 }

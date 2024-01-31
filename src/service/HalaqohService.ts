@@ -72,7 +72,13 @@ class HalaqohService {
     try {
       const halaqoh = await this.halaqohRepository.findOne({
         where: { id },
-        relations: ["kehadiran", "guru", "kehadiran.user"], // Specify the relations you want to load
+        relations: [
+          "kehadiran",
+          "guru",
+          "kehadiran.user",
+          "kehadiran.user.profile",
+          "guru.profile",
+        ], // Specify the relations you want to load
       });
 
       if (!halaqoh) {

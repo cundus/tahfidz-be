@@ -26,7 +26,9 @@ class SekolahController {
 
   async create(req: Request, res: Response) {
     try {
-      const response = await SekolahService.create(req.body);
+      const filename = res.locals.filename;
+
+      const response = await SekolahService.create(req.body, filename);
       return res.status(201).json(response);
     } catch (err) {
       console.error("Error in create method:", err);
@@ -37,7 +39,8 @@ class SekolahController {
   async update(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const response = await SekolahService.update(req.body, id);
+      const filename = res.locals.filename;
+      const response = await SekolahService.update(req.body, id, filename);
       return res.status(200).json(response);
     } catch (err) {
       console.error("Error in update method:", err);
