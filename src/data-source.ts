@@ -1,5 +1,13 @@
 import { DataSource } from "typeorm";
 import dotenv = require("dotenv");
+import { User } from "./entities/Users";
+import { Profile } from "./entities/Profile";
+import { Sekolah } from "./entities/Sekolah";
+import { TahunAjaran } from "./entities/TahunAjaran";
+import { Halaqoh } from "./entities/Halaqoh";
+import { Kehadiran } from "./entities/Kehadiran";
+import { Hafalan } from "./entities/Hafalan";
+import { Ujian } from "./entities/Ujian";
 
 dotenv.config();
 
@@ -12,7 +20,16 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME,
   synchronize: true,
   logging: true,
-  entities: ["src/entities/*.ts"],
+  entities: [
+    User,
+    Profile,
+    Sekolah,
+    TahunAjaran,
+    Halaqoh,
+    Kehadiran,
+    Hafalan,
+    Ujian,
+  ],
   migrations: ["src/migrations/*.ts"],
   subscribers: [],
 });

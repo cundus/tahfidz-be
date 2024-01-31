@@ -90,7 +90,8 @@ class UserController {
 
       if (
         response.message === "Email / Password is wrong!" ||
-        response.message === "User not found!"
+        response.message === "User not found!" ||
+        response.message === "Role is not correct!"
       ) {
         sendError(res, "Email / Password is wrong!", 401); // 401 Unauthorized
         return;

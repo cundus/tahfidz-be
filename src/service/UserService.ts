@@ -243,6 +243,12 @@ class UserService {
       };
     }
 
+    if (user.role !== reqBody.role) {
+      return {
+        message: "Role is not correct!",
+      };
+    }
+
     const isPassValid = await bcrypt.compare(reqBody.password, user.password);
 
     if (!isPassValid) {

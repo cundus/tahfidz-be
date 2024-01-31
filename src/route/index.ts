@@ -35,12 +35,12 @@ router.post("/users/dummy", UserController.dummy);
 // router.delete("/posts/:id", auth, PostController.delete);
 
 // Tahun Ajaran routes
-router.get("/tahunAjaran", TahunAjaranController.find);
-router.get("/tahunAjaran/:id", TahunAjaranController.findOne);
-router.post("/tahunAjaran", TahunAjaranController.create);
-router.put("/tahunAjaran/:id", TahunAjaranController.update);
-router.delete("/tahunAjaran/:id", TahunAjaranController.delete);
-router.post("/tahunAjaran/dummy", TahunAjaranController.dummy);
+router.get("/tahun-ajaran", TahunAjaranController.find);
+router.get("/tahun-ajaran/:id", TahunAjaranController.findOne);
+router.post("/tahun-ajaran", TahunAjaranController.create);
+router.put("/tahun-ajaran/:id", TahunAjaranController.update);
+router.delete("/tahun-ajaran/:id", TahunAjaranController.delete);
+router.post("/tahun-ajaran/dummy", TahunAjaranController.dummy);
 
 // Sekolah routes
 router.get("/sekolah", SekolahController.find);
