@@ -29,6 +29,7 @@
   },
   "scripts": {
     "start": "ts-node src/index.ts",
-    "start:dev": "nodemon --watch src/**/*.ts --exec ts-node src/index.ts"
+    "start:dev": "nodemon --watch src/**/*.ts --exec ts-node src/index.ts",
+    "seed": "ts-node src/seeders/UserSeeder.ts"
   }
 }
