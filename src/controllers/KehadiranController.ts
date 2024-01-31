@@ -43,15 +43,17 @@ class KehadiranController {
     }
   }
 
-  //   async create(req: Request, res: Response) {
-  //     try {
-  //       const response = await KehadiranService.create(req.body);
-  //       return res.status(201).json(response);
-  //     } catch (err) {
-  //       console.error("Error in create method:", err);
-  //       sendError(res, "Cannot create halaqoh!");
-  //     }
-  //   }
+  async create(req: Request, res: Response) {
+    try {
+      let { meet } = req.query;
+
+      const response = await KehadiranService.create(req.body, meet);
+      return res.status(201).json(response);
+    } catch (err) {
+      console.error("Error in create method:", err);
+      sendError(res, "Cannot create halaqoh!");
+    }
+  }
 
   async update(req: Request, res: Response) {
     try {

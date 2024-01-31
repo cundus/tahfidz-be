@@ -59,7 +59,7 @@ router.delete("/halaqoh/:id", HalaqohController.delete);
 // kehadiran routes
 router.get("/kehadiran", KehadiranController.find);
 router.get("/kehadiran/:id", KehadiranController.findOne);
-// router.post("/kehadiran", KehadiranController.create);
+router.post("/kehadiran", KehadiranController.create);
 router.put("/kehadiran", KehadiranController.update);
 router.delete("/kehadiran/:id", KehadiranController.delete);
 

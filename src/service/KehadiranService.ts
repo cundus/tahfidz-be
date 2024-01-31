@@ -70,6 +70,57 @@ class KehadiranService {
     }
   }
 
+  async create(reqBody?: any, meet?: any) {
+    try {
+      console.log("Request Body:", reqBody);
+
+      const halaqohId = reqBody.halaqohId;
+      const siswaId = reqBody.siswaId;
+
+      // Find halaqoh
+      const halaqoh = await this.halaqohRepository.findOne({
+        where: {
+          id: halaqohId,
+        },
+      });
+
+      if (!halaqoh) {
+        return {
+          message: `Halaqoh user with ID ${halaqohId} not found`,
+        };
+      }
+      // Find siswa user
+      const siswa = await this.userRepository.findOne({
+        where: {
+          id: siswaId,
+        },
+      });
+
+      if (!siswa) {
+        return {
+          message: `Siswa with ID ${siswa} not found`,
+        };
+      }
+
+      const hafalan = this.kehadiranRepository.create({
+        meet: `Meet ${meet}`,
+        status: reqBody.status,
+        tanggal: reqBody.tanggal,
+        user: siswa,
+        halaqoh: halaqoh,
+      });
+
+      await this.kehadiranRepository.save(hafalan);
+
+      return {
+        message: "Successfully Created Hafalan data",
+        hafalan,
+      };
+    } catch (error) {
+      throw new Error("Something wrong on the server!");
+    }
+  }
+
   async update(reqBody?: any[], meet?: any, halaqohId?: any): Promise<any> {
     try {
       const updateResults = [];

@@ -382,6 +382,41 @@
 					"response": []
 				},
 				{
+					"name": "post kehadiran",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"status\": \"Izin\",\r\n        \"tanggal\": \"2025-01-31\",\r\n        \"user\": 2,\r\n        \"halaqoh\": 1\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/kehadiran?meet=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"kehadiran"
+							],
+							"query": [
+								{
+									"key": "meet",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "update kehadiran",
 					"request": {
 						"method": "PUT",
@@ -396,7 +431,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/kehadiran?&meet=2&halaqohId=1",
+							"raw": "http://localhost:3000/api/kehadiran?meet=2&halaqohId=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -407,10 +442,6 @@
 								"kehadiran"
 							],
 							"query": [
-								{
-									"key": null,
-									"value": null
-								},
 								{
 									"key": "meet",
 									"value": "2"
