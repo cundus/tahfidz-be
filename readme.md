@@ -23,9 +23,32 @@ cd tahfidz-be
 npm install
 ```
 
-## Langkah 4: Konfigurasi Database
+## Langkah 4: Konfigurasi Enviroment
 
-Buka file `src/data-source.ts` lalu sesuaikan pengaturan koneksi database dengan pengaturan database MySQL Anda. Pastikan untuk memasukkan host, port, username, password, dan database yang sesuai.
+Duplikat file .env.example dan ubah namanya menjadi .env. Kemudian, sesuaikan pengaturan koneksi database dengan pengaturan database MySQL Anda di dalam file .env. Pastikan untuk memasukkan host, nama pengguna, kata sandi, dan nama database yang sesuai.
+
+```
+PORT=3000
+DB_HOST=localhost
+DB_PORT=3306
+DB_USERNAME=root
+DB_PASSWORD=password
+DB_NAME=your-database-name
+```
+
+Tambahkan konfigurasi Cloudinary di dalam file .env. Anda akan memerlukan CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, dan CLOUDINARY_API_SECRET yang dapat Anda dapatkan dari akun Cloudinary Anda.
+
+```
+CLOUDINARY_CLOUD_NAME=your-cloudinary-cloud-name
+CLOUDINARY_API_KEY=your-cloudinary-api-key
+CLOUDINARY_API_SECRET=your-cloudinary-api-secret
+```
+
+Tambahkan juga konfigurasi JWT_SECRET di dalam file .env. Ini akan digunakan untuk menghasilkan token JWT untuk otentikasi.
+
+```
+JWT_SECRET=your-secret-key-here
+```
 
 ## Langkah 5: Import Database ke phpMyAdmin
 
@@ -36,8 +59,7 @@ Buka phpMyAdmin di browser Anda dan buatlah database baru dengan nama yang sesua
 3. Klik pada tab "Import" di bagian atas.
 4. Pilih file skema database `tahfidz.sql` yang disediakan.
 
-![Langkah 1: Klik Tab Import](/assets/1.png)
-5. Klik tombol "Impor" untuk memulai proses import.
+![Langkah 1: Klik Tab Import](/assets/1.png) 5. Klik tombol "Impor" untuk memulai proses import.
 
 ![Langkah 2: Klik Tombol Impor](/assets/2.png)
 
