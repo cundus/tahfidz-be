@@ -1,93 +1,50 @@
-# express-typeorm-boilerplate
+# Tahfidz Backend
 
-This is a boilerplate project for building a RESTful API using Express.js and TypeORM. It includes user authentication, CRUD operations, and JWT-based authorization.
+Berikut ini step by step instalasi project tahfidz backend:
 
-## Project Structure
+## Langkah 1: Prasyarat
 
-- `src`: Contains the source code for the application.
-  - `controllers`: Handles HTTP request handling and interacts with the services.
-  - `data-source`: Configures and initializes the data source (TypeORM).
-  - `entities`: Defines database entities (TypeORM entities).
-  - `libs`: Contains utility functions and validation logic.
-  - `middleware`: Includes middleware functions (e.g., authentication).
-  - `route`: Defines API routes using Express Router.
-  - `service`: Implements business logic and communicates with the database.
-- `dotenv`: Configuration files for environment variables.
-- `tsconfig.json`: TypeScript configuration file.
-- `package.json`: Project metadata and dependencies.
-- `README.md`: Project documentation.
+Pastikan komputer Anda telah terinstall Node.js dan npm (Node Package Manager). Anda juga membutuhkan akses ke phpMyAdmin dan database MySQL yang telah disiapkan.
 
-## Dependencies
+## Langkah 2: Clone Repository
 
-- **bcrypt**: Password hashing library.
-- **cors**: Middleware for handling Cross-Origin Resource Sharing.
-- **express**: Web framework for handling HTTP requests.
-- **joi**: Schema validation library.
-- **jsonwebtoken**: Library for generating and verifying JWTs.
-- **mysql**: MySQL database driver for Node.js.
-- **reflect-metadata**: Library for reflection metadata.
-- **typeorm**: ORM for TypeScript and JavaScript.
+Clone repository `tahfidz-be` ke komputer anda.
 
-## Development Dependencies
-
-- **@types/bcrypt**, **@types/cors**, **@types/express**, **@types/jsonwebtoken**, **@types/node**: TypeScript type definitions for development.
-- **dotenv**: Loads environment variables from a .env file.
-- **nodemon**: Monitors changes in the source code and automatically restarts the server.
-- **ts-node**, **typescript**: TypeScript execution environment and compiler.
-
-## Scripts
-
-- `start`: Starts the server using `ts-node`.
-- `start:dev`: Starts the server in development mode using `nodemon`.
-
-## Getting Started
-
-1. Install dependencies: `npm install`
-2. Create a `.env` file and configure environment variables.
-3. Run the application: `npm start`
-
-## API Endpoints
-
-- **GET /api/users**: Get all users.
-- **GET /api/users/:id**: Get a specific user by ID.
-- **POST /api/users**: Create a new user.
-- **PUT /api/users/:id**: Update an existing user.
-- **DELETE /api/users/:id**: Delete a user.
-- **POST /api/login**: User login.
-
-## Authentication
-
-This boilerplate includes a simple JWT-based authentication middleware (`auth`). To secure routes, include the middleware before the route handler.
-
-Example:
-
-```typescript
-import auth from "./middleware/auth";
-
-// Secure route
-router.get("/secure-route", auth, (req, res) => {
-  // Handle secure route logic
-});
+```
+git clone https://github.com/cundus/tahfidz-be.git
 ```
 
-## Configuration
+## Langkah 3: Install Dependencies
 
-Update the `.env` file with your specific configuration, including database connection details, JWT secret key, and other environment variables.
+Masuk ke dalam direktori proyek yang baru saja di-clone, dan instal semua dependencies yang diperlukan menggunakan npm:
 
-```env
-PORT=3000
-DB_HOST=localhost
-DB_PORT=3306
-DB_USERNAME=root
-DB_PASSWORD=password
-DB_NAME=testdb
-JWT_SECRET=your-secret-key-here
+```
+cd tahfidz-be
+npm install
 ```
 
-## Contributing
+## Langkah 4: Konfigurasi Database
 
-Feel free to contribute to this project by submitting issues or pull requests. Report any bugs or suggest improvements.
+Buka file `src/data-source.ts` lalu sesuaikan pengaturan koneksi database dengan pengaturan database MySQL Anda. Pastikan untuk memasukkan host, port, username, password, dan database yang sesuai.
 
-## License
+## Langkah 5: Import Database ke phpMyAdmin
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Buka phpMyAdmin di browser Anda dan buatlah database baru dengan nama yang sesuai. Setelah itu, impor skema database `tahfidz.sql` yang disediakan ke dalam database yang baru saja dibuat. Anda bisa melakukan ini dengan mengikuti langkah-langkah berikut:
+
+1. Buka phpMyAdmin dan login.
+2. Pilih database yang baru saja dibuat.
+3. Klik pada tab "Import" di bagian atas.
+4. Pilih file skema database `tahfidz.sql` yang disediakan.
+5. ![Langkah 1: Klik Tab Import](/assets/1.png)
+6. Klik tombol "Impor" untuk memulai proses import.
+7. ![Langkah 2: Klik Tombol Impor](/assets/2.png)
+
+## Langkah 6: Menjalankan Server
+
+Setelah langkah-langkah di atas selesai, Anda dapat menjalankan server backend dengan menjalankan perintah berikut di terminal:
+
+```
+npm start
+```
+
+Server akan berjalan di port yang telah ditentukan (biasanya port 3000). Anda dapat mengaksesnya melalui browser atau menggunakan aplikasi HTTP client seperti Postman.
