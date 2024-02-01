@@ -35,9 +35,11 @@ Buka phpMyAdmin di browser Anda dan buatlah database baru dengan nama yang sesua
 2. Pilih database yang baru saja dibuat.
 3. Klik pada tab "Import" di bagian atas.
 4. Pilih file skema database `tahfidz.sql` yang disediakan.
-5. ![Langkah 1: Klik Tab Import](/assets/1.png)
-6. Klik tombol "Impor" untuk memulai proses import.
-7. ![Langkah 2: Klik Tombol Impor](/assets/2.png)
+
+![Langkah 1: Klik Tab Import](/assets/1.png)
+5. Klik tombol "Impor" untuk memulai proses import.
+
+![Langkah 2: Klik Tombol Impor](/assets/2.png)
 
 ## Langkah 6: Menjalankan Server
 
