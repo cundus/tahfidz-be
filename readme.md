@@ -72,3 +72,12 @@ npm start
 ```
 
 Server akan berjalan di port yang telah ditentukan (biasanya port 3000). Anda dapat mengaksesnya melalui browser atau menggunakan aplikasi HTTP client seperti Postman.
+
+## Note:
+
+Untuk akun admin adalah sebagai berikut: 
+
+```
+username: admin
+password: admin
+```
