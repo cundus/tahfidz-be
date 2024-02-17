@@ -6,7 +6,6 @@ import { User } from "../entities/Users";
 import { Kehadiran } from "../entities/Kehadiran";
 import { TahunAjaran } from "../entities/TahunAjaran";
 
-
 type Profile = {
   id: number;
   nama_lengkap: string;
@@ -20,13 +19,13 @@ type TSiswa = {
 
 type TSiswaHadir = {
   id: number;
-    meet: string;
-    status: string;
-    tanggal: string;
-    createdAt: string;
-    updatedAt: string;
-    user: TSiswa;
-}
+  meet: string;
+  status: string;
+  tanggal: string;
+  createdAt: string;
+  updatedAt: string;
+  user: TSiswa;
+};
 
 class HalaqohService {
   private readonly halaqohRepository: Repository<Halaqoh> =
@@ -34,7 +33,8 @@ class HalaqohService {
   private readonly userRepository: Repository<User> =
     AppDataSource.getRepository(User);
   private readonly kehadiranRepository: Repository<Kehadiran> =
-    AppDataSource.getRepository(Kehadiran);8
+    AppDataSource.getRepository(Kehadiran);
+  8;
   private readonly tahunAjaranRepository: Repository<TahunAjaran> =
     AppDataSource.getRepository(TahunAjaran);
 
@@ -47,7 +47,7 @@ class HalaqohService {
           "kehadiran.user",
           "kehadiran.user.profile",
           "guru.profile",
-          "tahun_ajaran"
+          "tahun_ajaran",
         ],
         skip: (page - 1) * pageSize,
         take: pageSize,
@@ -65,15 +65,31 @@ class HalaqohService {
           }
         });
 
+        const uniqueUsers2 = new Set();
+        const uniqueKehadiran2 = h.kehadiran.filter((k) => {
+          if (uniqueUsers2.has(k.user.id)) {
+            uniqueUsers2.add(k.user.id); // Add user ID to Set
+          }
+        });
+
         return {
           nama_guru: h.guru.profile.nama_lengkap,
           guru_id: h.guru.profile.id,
           id: h.id,
           nama_halaqoh: h.nama_halaqoh,
+          tahun_ajaran: h.tahun_ajaran,
           status: h.status,
           siswa: uniqueKehadiran.map((k) => ({
             nama_siswa: k.user.profile.nama_lengkap,
             siswa_id: k.user.id,
+            nomor_induk: k.user.profile.nomor_induk,
+            kehadiran: uniqueKehadiran2.map((u) => ({
+              id: u.id,
+              meet: u.meet,
+              status: u.status,
+              siswa_id: u.user.id,
+              nama_siswa: u.user.profile.nama_lengkap,
+            })),
             // status: k.status,
             // meet: k.meet,
             // tanggal: k.tanggal,
@@ -101,7 +117,7 @@ class HalaqohService {
           "kehadiran.user",
           "kehadiran.user.profile",
           "guru.profile",
-          "tahun_ajaran"
+          "tahun_ajaran",
         ], // Specify the relations you want to load
       });
 
@@ -111,16 +127,60 @@ class HalaqohService {
         };
       }
 
+      // const transformedData = halaqoh.map((h) => {
+      // Use Set to filter out duplicate user IDs
+      const uniqueUsers = new Set();
+      const uniqueKehadiran = halaqoh.kehadiran.filter((k) => {
+        if (uniqueUsers.has(k.user.id)) {
+          return false; // If user ID is already in Set, filter it out
+        } else {
+          uniqueUsers.add(k.user.id); // Add user ID to Set
+          return true; // Keep this kehadiran entry
+        }
+      });
+
       return {
-        message: "Halaqoh with Users Successfully Retrieved",
-        halaqoh,
+        nama_guru: halaqoh.guru.profile.nama_lengkap,
+        guru_id: halaqoh.guru.profile.id,
+        id: halaqoh.id,
+        nama_halaqoh: halaqoh.nama_halaqoh,
+        tahun_ajaran: halaqoh.tahun_ajaran,
+        status: halaqoh.status,
+        siswa: uniqueKehadiran.map((k) => ({
+          nama_siswa: k.user.profile.nama_lengkap,
+          siswa_id: k.user.id,
+          jenis_kelamin: k.user.profile.jenis_kelamin,
+          nomor_induk: k.user.profile.nomor_induk,
+          // kehadiran: uniqueKehadiran2.map((u) => ({
+          //   id: u.id,
+          //   meet: u.meet,
+          //   status: u.status,
+          //   siswa_id: u.user.id,
+          //   nama_siswa: u.user.profile.nama_lengkap,
+          // })),
+          status: k.status,
+          meet: k.meet,
+          tanggal: k.tanggal,
+        })),
+        kehadiran: halaqoh.kehadiran.map((u) => ({
+          id: u.id,
+          meet: u.meet,
+          status: u.status,
+          siswa_id: u.user.id,
+          nama_siswa: u.user.profile.nama_lengkap,
+        })),
       };
+      // });
+
+      // return {
+      //   message: "Halaqoh with Users Successfully Retrieved",
+      //   halaqoh,
+      // };
     } catch (error) {
       console.error({ message: error });
       throw error;
     }
   }
-
 
   async findOneForUpdate(id: any): Promise<any> {
     try {
@@ -132,7 +192,7 @@ class HalaqohService {
           "kehadiran.user",
           "kehadiran.user.profile",
           "guru.profile",
-          "tahun_ajaran"
+          "tahun_ajaran",
         ], // Specify the relations you want to load
       });
 
@@ -142,39 +202,36 @@ class HalaqohService {
         };
       }
 
-
-
       // nama halaqoh: halaqoh.nama_halaqoh
       // status : halaqoh.status
       // guru : { nama_lengkap:halaqoh.guru.profile,id:halaqoh.guru.profile.nama_lengkap}
       //  untuk siswa di loop
 
-    const dataSiswa = halaqoh.kehadiran.map((item)=>{
-      const data = {
-        siswaId: item.user.id,
-        nama_lengkap:item.user.profile.nama_lengkap,
-        status: item.status
-      }
+      const dataSiswa = halaqoh.kehadiran.map((item) => {
+        const data = {
+          siswaId: item.user.id,
+          nama_lengkap: item.user.profile.nama_lengkap,
+          status: item.status,
+        };
 
-      return data
-    })
+        return data;
+      });
 
-    const dataForResponse = {
-      id:halaqoh.id,
-      nama_halaqoh: halaqoh.nama_halaqoh,
-      status: halaqoh.status,
-      tahun_ajaran: halaqoh.tahun_ajaran.nama_tahun_ajaran,
-      guru:{
-        id:halaqoh.guru.profile.id,
-        nama_lengkap:halaqoh.guru.profile.nama_lengkap
-      },
-      siswa: dataSiswa
-    }
-
+      const dataForResponse = {
+        id: halaqoh.id,
+        nama_halaqoh: halaqoh.nama_halaqoh,
+        status: halaqoh.status,
+        tahun_ajaran: halaqoh.tahun_ajaran.nama_tahun_ajaran,
+        guru: {
+          id: halaqoh.guru.profile.id,
+          nama_lengkap: halaqoh.guru.profile.nama_lengkap,
+        },
+        siswa: dataSiswa,
+      };
 
       return {
         message: "Halaqoh with Users Successfully Retrieved",
-        halaqoh:dataForResponse
+        halaqoh: dataForResponse,
       };
     } catch (error) {
       console.error({ message: error });
@@ -414,3 +471,16 @@ class HalaqohService {
 }
 
 export default new HalaqohService();
+
+[
+  {
+    id: 1, // siswa_id
+    status: "izin",
+    tanggal: "30-2-2020",
+  },
+  {
+    id: 2,
+    status: "alpha",
+    tanggal: "30-2-2020",
+  },
+];
