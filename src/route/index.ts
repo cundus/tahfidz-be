@@ -58,6 +58,9 @@ router.post("/halaqoh", HalaqohController.create);
 router.put("/halaqoh/:id", HalaqohController.update);
 router.delete("/halaqoh/:id", HalaqohController.delete);
 
+// halaqoh update router
+router.get("/halaqoh-update/:id",HalaqohController.findOneForUpdate)
+
 // kehadiran routes
 router.get("/kehadiran", KehadiranController.find);
 router.get("/kehadiran/:id", KehadiranController.findOne);
@@ -71,6 +74,7 @@ router.get("/hafalan/:id", HafalanController.findOne);
 router.post("/hafalan", HafalanController.create);
 router.put("/hafalan/:id", HafalanController.update);
 router.delete("/hafalan/:id", HafalanController.delete);
+
 
 // Ujian routes
 router.get("/ujian", UjianController.find);

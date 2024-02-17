@@ -41,10 +41,10 @@ export class Profile {
    @Column({ nullable: true })
    foto: string;
 
-   @Column()
+   @Column({ nullable: true, default: "" })
    nama_ayah: string;
 
-   @Column()
+   @Column({ nullable: true, default: "" })
    nama_ibu: string;
 
    @Column({ nullable: true })

@@ -6,13 +6,35 @@ import { User } from "../entities/Users";
 import { Kehadiran } from "../entities/Kehadiran";
 import { TahunAjaran } from "../entities/TahunAjaran";
 
+
+type Profile = {
+  id: number;
+  nama_lengkap: string;
+};
+
+type TSiswa = {
+  id: number;
+  username: string;
+  profile: Profile;
+};
+
+type TSiswaHadir = {
+  id: number;
+    meet: string;
+    status: string;
+    tanggal: string;
+    createdAt: string;
+    updatedAt: string;
+    user: TSiswa;
+}
+
 class HalaqohService {
   private readonly halaqohRepository: Repository<Halaqoh> =
     AppDataSource.getRepository(Halaqoh);
   private readonly userRepository: Repository<User> =
     AppDataSource.getRepository(User);
   private readonly kehadiranRepository: Repository<Kehadiran> =
-    AppDataSource.getRepository(Kehadiran);
+    AppDataSource.getRepository(Kehadiran);8
   private readonly tahunAjaranRepository: Repository<TahunAjaran> =
     AppDataSource.getRepository(TahunAjaran);
 
@@ -25,6 +47,7 @@ class HalaqohService {
           "kehadiran.user",
           "kehadiran.user.profile",
           "guru.profile",
+          "tahun_ajaran"
         ],
         skip: (page - 1) * pageSize,
         take: pageSize,
@@ -90,6 +113,67 @@ class HalaqohService {
       return {
         message: "Halaqoh with Users Successfully Retrieved",
         halaqoh,
+      };
+    } catch (error) {
+      console.error({ message: error });
+      throw error;
+    }
+  }
+
+
+  async findOneForUpdate(id: any): Promise<any> {
+    try {
+      const halaqoh = await this.halaqohRepository.findOne({
+        where: { id },
+        relations: [
+          "kehadiran",
+          "guru",
+          "kehadiran.user",
+          "kehadiran.user.profile",
+          "guru.profile",
+          "tahun_ajaran"
+        ], // Specify the relations you want to load
+      });
+
+      if (!halaqoh) {
+        return {
+          message: "Halaqoh not found",
+        };
+      }
+
+
+
+      // nama halaqoh: halaqoh.nama_halaqoh
+      // status : halaqoh.status
+      // guru : { nama_lengkap:halaqoh.guru.profile,id:halaqoh.guru.profile.nama_lengkap}
+      //  untuk siswa di loop
+
+    const dataSiswa = halaqoh.kehadiran.map((item)=>{
+      const data = {
+        siswaId: item.user.id,
+        nama_lengkap:item.user.profile.nama_lengkap,
+        status: item.status
+      }
+
+      return data
+    })
+
+    const dataForResponse = {
+      id:halaqoh.id,
+      nama_halaqoh: halaqoh.nama_halaqoh,
+      status: halaqoh.status,
+      tahun_ajaran: halaqoh.tahun_ajaran.nama_tahun_ajaran,
+      guru:{
+        id:halaqoh.guru.profile.id,
+        nama_lengkap:halaqoh.guru.profile.nama_lengkap
+      },
+      siswa: dataSiswa
+    }
+
+
+      return {
+        message: "Halaqoh with Users Successfully Retrieved",
+        halaqoh:dataForResponse
       };
     } catch (error) {
       console.error({ message: error });

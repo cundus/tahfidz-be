@@ -37,6 +37,18 @@ class HalaqohController {
     }
   }
 
+  async findOneForUpdate(req:Request,res:Response){
+    try {
+      const id = req.params.id;
+      const response = await HalaqohService.findOneForUpdate(id)
+      return res.status(200).json(response)
+    } catch (error) {
+      console.log("error in findOneForUpdate method",error);
+      sendError(res,"cannot get data halaqoh")
+      
+    }
+  }
+
   async create(req: Request, res: Response) {
     try {
       const response = await HalaqohService.create(req.body);

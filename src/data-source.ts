@@ -12,7 +12,7 @@ import { Ujian } from "./entities/Ujian";
 dotenv.config();
 
 export const AppDataSource = new DataSource({
-   type: "mysql",
+   type: "postgres",
    host: process.env.DB_HOST as string,
    port: Number(process.env.DB_PORT),
    username: process.env.DB_USERNAME,
@@ -20,6 +20,7 @@ export const AppDataSource = new DataSource({
    database: process.env.DB_NAME,
    synchronize: true,
    logging: false,
+   ssl:true,
    entities: [
       User,
       Profile,
