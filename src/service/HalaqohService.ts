@@ -101,6 +101,7 @@ class HalaqohService {
           "kehadiran.user",
           "kehadiran.user.profile",
           "guru.profile",
+          "tahun_ajaran"
         ], // Specify the relations you want to load
       });
 
