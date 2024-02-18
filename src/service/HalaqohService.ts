@@ -34,7 +34,7 @@ class HalaqohService {
     AppDataSource.getRepository(User);
   private readonly kehadiranRepository: Repository<Kehadiran> =
     AppDataSource.getRepository(Kehadiran);
-  8;
+
   private readonly tahunAjaranRepository: Repository<TahunAjaran> =
     AppDataSource.getRepository(TahunAjaran);
 
@@ -127,15 +127,23 @@ class HalaqohService {
         };
       }
 
-      // const transformedData = halaqoh.map((h) => {
-      // Use Set to filter out duplicate user IDs
+      const kehadiran = await this.kehadiranRepository.find({
+        relations: ["user", "halaqoh"],
+      });
+
+      if (!kehadiran) {
+        return {
+          message: "kehadiran not found",
+        };
+      }
+
       const uniqueUsers = new Set();
       const uniqueKehadiran = halaqoh.kehadiran.filter((k) => {
         if (uniqueUsers.has(k.user.id)) {
-          return false; // If user ID is already in Set, filter it out
+          return false;
         } else {
-          uniqueUsers.add(k.user.id); // Add user ID to Set
-          return true; // Keep this kehadiran entry
+          uniqueUsers.add(k.user.id);
+          return true;
         }
       });
 
@@ -151,31 +159,17 @@ class HalaqohService {
           siswa_id: k.user.id,
           jenis_kelamin: k.user.profile.jenis_kelamin,
           nomor_induk: k.user.profile.nomor_induk,
-          // kehadiran: uniqueKehadiran2.map((u) => ({
-          //   id: u.id,
-          //   meet: u.meet,
-          //   status: u.status,
-          //   siswa_id: u.user.id,
-          //   nama_siswa: u.user.profile.nama_lengkap,
-          // })),
-          status: k.status,
-          meet: k.meet,
-          tanggal: k.tanggal,
-        })),
-        kehadiran: halaqoh.kehadiran.map((u) => ({
-          id: u.id,
-          meet: u.meet,
-          status: u.status,
-          siswa_id: u.user.id,
-          nama_siswa: u.user.profile.nama_lengkap,
+          kehadiran: kehadiran
+            .filter((u) => u.user.id === k.user.id)
+            .map((m) => ({
+              id: m.id,
+              meet: m.meet,
+              status: m.status,
+              halaqoh: m.halaqoh.id,
+              tanggal: m.tanggal,
+            })),
         })),
       };
-      // });
-
-      // return {
-      //   message: "Halaqoh with Users Successfully Retrieved",
-      //   halaqoh,
-      // };
     } catch (error) {
       console.error({ message: error });
       throw error;
