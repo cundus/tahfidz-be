@@ -149,7 +149,7 @@ class HalaqohService {
 
       return {
         nama_guru: halaqoh.guru.profile.nama_lengkap,
-        guru_id: halaqoh.guru.profile.id,
+        guru_id: halaqoh.guru.id,
         id: halaqoh.id,
         nama_halaqoh: halaqoh.nama_halaqoh,
         tahun_ajaran: halaqoh.tahun_ajaran,
@@ -362,6 +362,7 @@ class HalaqohService {
 
       halaqoh.nama_halaqoh = reqBody.nama_halaqoh || halaqoh.nama_halaqoh;
       halaqoh.tahun_ajaran = reqBody.tahun_ajaran || halaqoh.tahun_ajaran;
+      halaqoh.status = reqBody.status
 
       // Update halaqoh entity
       const updatedHalaqoh = await this.halaqohRepository.save(halaqoh);
