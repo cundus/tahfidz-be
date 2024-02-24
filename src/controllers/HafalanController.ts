@@ -5,7 +5,7 @@ import HafalanService from "../service/HafalanService";
 class HafalanController {
   async find(req: Request, res: Response) {
     try {
-      let { page = 1, pageSize = 10, type } = req.query;
+      let { page = 1, pageSize = 10, type, siswaId } = req.query;
 
       if (type === "") type = null;
 
@@ -23,7 +23,8 @@ class HafalanController {
       const response = await HafalanService.findAll(
         parsedPage,
         parsedPageSize,
-        type
+        type,
+        siswaId
       );
       return res.status(200).json(response);
     } catch (error) {

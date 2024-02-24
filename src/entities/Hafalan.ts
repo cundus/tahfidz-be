@@ -39,6 +39,9 @@ export class Hafalan {
   nilai_tajwid: string;
 
   @Column()
+  tanggal: Date
+
+  @Column()
   type: string;
 
   @CreateDateColumn()

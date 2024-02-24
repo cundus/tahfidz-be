@@ -12,11 +12,14 @@ class HafalanService {
   private readonly hafalanRepository: Repository<Hafalan> =
     AppDataSource.getRepository(Hafalan);
 
-  async findAll(page?: any, pageSize?: any, type?: any) {
+  async findAll(page?: any, pageSize?: any, type?: any, siswaId?:any) {
     try {
       const hafalan = await this.hafalanRepository.find({
         where: {
           type: type,
+          user: {
+            id: siswaId
+          }
         },
         relations: [
           "user",
@@ -112,6 +115,7 @@ class HafalanService {
         surat_akhir: reqBody.surat_akhir,
         nilai_hafalan: reqBody.nilai_hafalan,
         nilai_tajwid: reqBody.nilai_tajwid,
+        tanggal: reqBody.tanggal,
         type: type,
         user: siswa,
         halaqoh: halaqoh,
