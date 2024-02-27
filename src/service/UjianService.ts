@@ -12,12 +12,12 @@ class UjianService {
   private readonly ujianRepository: Repository<Ujian> =
     AppDataSource.getRepository(Ujian);
 
-  async findAll(page?: any, pageSize?: any, halaqoh?: any) {
+  async findAll(page?: any, pageSize?: any, siswaId?:any) {
     try {
       const ujian = await this.ujianRepository.find({
         where: {
-          halaqoh: {
-            id: halaqoh,
+          user: {
+            id: siswaId
           },
         },
         relations: [

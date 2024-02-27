@@ -5,7 +5,7 @@ import UjianService from "../service/UjianService";
 class UjianController {
   async find(req: Request, res: Response) {
     try {
-      let { page = 1, pageSize = 10 } = req.query;
+      let { page = 1, pageSize = 10, siswaId } = req.query;
 
       const parsedPage = parseInt(page as string, 10);
       const parsedPageSize = parseInt(pageSize as string, 10);
@@ -18,7 +18,7 @@ class UjianController {
       ) {
         return res.status(400).json({ error: "Invalid pagination parameters" });
       }
-      const response = await UjianService.findAll(parsedPage, parsedPageSize);
+      const response = await UjianService.findAll(parsedPage, parsedPageSize, siswaId);
       return res.status(200).json(response);
     } catch (error) {
       console.error("Error in find method:", error);
