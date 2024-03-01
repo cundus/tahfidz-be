@@ -134,11 +134,10 @@ class KehadiranService {
             halaqoh: {
               id: halaqohId,
             },
-            user: {
-              id: id,
-            },
+            id: id,
           },
         });
+        console.log(kehadiran);
 
         if (!kehadiran) {
           updateResults.push({
